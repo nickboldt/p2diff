@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+
+	<parent>
+		<groupId>org.eclipse.equinox.p2.example</groupId>
+		<artifactId>parent</artifactId>
+		<version>1.0.0-SNAPSHOT</version>
+		<relativePath>../org.eclipse.equinox.p2.example.p2diff.releng/parent</relativePath>
+	</parent>
+
+	<groupId>org.eclipse.equinox.p2.example.p2diff</groupId>
+	<artifactId>p2diff</artifactId>
+	<version>1.0.0-SNAPSHOT</version>
+	<name>p2diff - Deployment Reactor</name>
+	<packaging>pom</packaging>
+
+	<build>
+		<plugins>
+			<plugin>
+				<groupId>org.codehaus.mojo</groupId>
+				<artifactId>build-helper-maven-plugin</artifactId>
+				<version>1.5</version>
+				<executions>
+					<execution>
+						<id>attach-artifacts</id>
+						<phase>package</phase>
+						<goals>
+							<goal>attach-artifact</goal>
+						</goals>
+						<configuration>
+							<artifacts>
+								<artifact>
+									<file>../org.eclipse.equinox.p2.example.p2diff.packaging/target/products/org.eclipse.equinox.p2.example.p2diff.product-linux.gtk.x86.zip</file>
+									<classifier>x86</classifier>
+									<type>zip</type>
+								</artifact>
+								<artifact>
+									<file>../org.eclipse.equinox.p2.example.p2diff.packaging/target/products/org.eclipse.equinox.p2.example.p2diff.product-linux.gtk.x86_64.zip</file>
+									<classifier>x86_64</classifier>
+									<type>zip</type>
+								</artifact>
+							</artifacts>
+						</configuration>
+					</execution>
+				</executions>
+			</plugin>
+		</plugins>
+	</build>
+
+  <!-- To deploy to Nexus -->
+  <!-- Don't change "id" since it should match credentials entry in $M2_REPO/settings.xml -->
+  <distributionManagement>
+    <snapshotRepository>
+      <id>jboss-snapshots-repository</id>
+      <name>JBoss Snapshots Repository</name>
+      <url>https://repository.jboss.org/nexus/content/repositories/snapshots/</url>
+      <uniqueVersion>false</uniqueVersion>
+    </snapshotRepository>
+    <repository>
+      <id>jboss-releases-repository</id>
+      <name>JBoss Staging Service</name>
+      <uniqueVersion>false</uniqueVersion>
+      <url>https://repository.jboss.org/nexus/service/local/staging/deploy/maven2/</url>
+    </repository>
+  </distributionManagement>
+
+	<!--
+		first run a build with: 
+
+		mvn clean install -f ../org.eclipse.equinox.p2.example.p2diff.releng
+	 	
+	 	then deploy linux gtk x86 and x86_64 zips to Nexus (needs permission) with: 
+
+	 	mvn deploy
+	-->
+
+</project>
