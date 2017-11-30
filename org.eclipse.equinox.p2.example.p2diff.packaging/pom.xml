@@ -6,7 +6,7 @@
   <parent>
     <groupId>org.eclipse.equinox.p2.example</groupId>
     <artifactId>parent</artifactId>
-    <version>1.0.0-SNAPSHOT</version>
+    <version>1.0.1-SNAPSHOT</version>
     <relativePath>../org.eclipse.equinox.p2.example.p2diff.releng/parent</relativePath>
   </parent>
 
@@ -71,6 +71,11 @@
         <version>${tycho-version}</version>
         <configuration>
           <includeAllDependencies>true</includeAllDependencies>
+          <products>
+            <product>
+              <id>org.eclipse.equinox.p2.example.p2diff.product</id>
+            </product>
+          </products>
         </configuration>
       </plugin>
     </plugins>
