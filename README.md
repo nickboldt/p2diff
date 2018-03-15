@@ -3,7 +3,6 @@ p2diff -- Shows the differences between two p2 repositories
 
 ##BUILDING
 <pre>
-[$] cd org.eclipse.equinox.p2.example.p2diff.releng  
 [$] mvn clean install
 </pre>
 
